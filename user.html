@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Página do Usuário</title>
+    <link rel="stylesheet" href="default.css">
+</head>
+<body>
+    <header>
+        <h1>Bem-vindo, [Nome do Usuário]</h1>
+        <nav>
+            <button onclick="location.href='permissions.html'">Gerenciar Permissões</button>
+            <button onclick="location.href='projeto.html'">Gerenciar Projetos</button>
+        </nav>
+    </header>
+    <main>
+        <section>
+            <label for="projetos">Projetos:</label>
+            <select id="projetos" name="projetos">
+                <option>Projeto 1</option>
+                <option>Projeto 2</option>
+            </select>
+            <table>
+                <thead>
+                    <tr>
+                        <th>Identificador</th>
+                        <th>Modelo</th>
+                        <th>Temperatura</th>
+                        <th>Pressão</th>
+                        <th>Altura</th>
+                        <th>Data</th>
+                        <th>Resultado</th>
+                        <th>Ações</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td>001</td>
+                        <td>Modelo X</td>
+                        <td>75</td>
+                        <td>1013</td>
+                        <td>10</td>
+                        <td>2025-01-01</td>
+                        <td>Aprovado</td>
+                        <td>
+                            <button>Editar</button>
+                            <button>Deletar</button>
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+            <button>Adicionar Registro</button>
+        </section>
+    </main>
+</body>
+</html>
