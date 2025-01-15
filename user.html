@@ -5,12 +5,17 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Página do Usuário</title>
     <link rel="stylesheet" href="default.css">
+    <script>
+        function showF(){
+        var forms = document.querySelector("form");
+        forms.style.display = "inline";
+        }
+    </script>
 </head>
 <body>
     <header>
         <h1>Bem-vindo, [Nome do Usuário]</h1>
         <nav>
-            <button onclick="location.href='permissssao.html'">Gerenciar Permissões</button>
             <button onclick="location.href='projeto.html'">Gerenciar Projetos</button>
         </nav>
     </header>
@@ -21,7 +26,22 @@
                 <option>Projeto 1</option>
                 <option>Projeto 2</option>
             </select>
-            <button>Adicionar Registro</button>
+            <button onclick="showF()">Adicionar Registro</button>
+            <form>
+                <label for="hardware">Hardware ID</label>
+                <input id ="hardware" type="text">
+                <label for="modelo">Modelo</label>
+                <input id ="modelo" type="text">
+                <label for="temperatura">Temperatura</label>
+                <input id ="temperatura" type="text">
+                <label for="pressao">Pressão</label>
+                <input id ="pressao" type="text">
+                <label for="altura">Altura</label>
+                <input id ="altura" type="text">
+                <label for="data">Data</label>
+                <input id ="data" type="date">
+                <input type="button" value="Salvar">
+            </form>
             <table>
                 <thead>
                     <tr>
@@ -44,7 +64,7 @@
                         <td>75</td>
                         <td>1013</td>
                         <td>10</td>
-                        <td>2025-01-01</td>
+                        <td>01-01-2025</td>
                         <td>Aprovado</td>
                         <td>
                             <button>Editar</button>
@@ -58,7 +78,7 @@
                         <td>85</td>
                         <td>988</td>
                         <td>25</td>
-                        <td>2025-01-14</td>
+                        <td>15-01-2025</td>
                         <td>Reprovado</td>
                         <td>
                             <button>Editar</button>
