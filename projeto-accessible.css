@@ -1,0 +1,149 @@
+body {
+    background-color: #000;
+    color: #FFF;
+    font-size: 18px; 
+    font-family: Arial, sans-serif;
+    line-height: 1.8;
+    margin: 0;
+    padding: 0;
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start; 
+    align-items: center;
+    height: 100vh; 
+    overflow: auto;
+  }
+  
+  header, footer {
+    text-align: center;
+    width: 100%;
+    background-color: #333; 
+    padding: 1.5em 0;
+    color: #FFF;
+    font-weight: bold;
+    letter-spacing: 1px;
+  }
+  
+  main {
+    width: 100%;
+    padding: 5vh;
+    box-sizing: border-box;
+    display: flex;
+    align-items: center;
+    flex-wrap: wrap;
+    justify-content: center;
+  }
+  
+  .tab-buttons {
+    text-align: center;
+    margin-bottom: 20px;
+  }
+  
+  a {
+    display: inline-block;
+    margin: 0 10px;
+    padding: 12px 24px;
+    background-color: #0056b3;
+    color: #FFD700;
+    text-decoration: none;
+    border-radius: 8px;
+    font-weight: bold;
+    border: 2px solid #FFD700;
+  }
+  
+  a:hover, a:focus {
+    background-color: #003c80;
+    border: 2px solid white;
+    text-decoration: underline;
+  }
+  
+  h2 {
+    text-align: center;
+    padding: 10px;
+  }
+
+  .atributos {
+    background-color: #FFD700;
+    color: #000;
+  }
+
+  .form-container {
+    max-width: 70vw;
+    background: #111;
+    color: #FFF;
+    border: 2px solid #FFF;
+    padding: 25px;
+    margin-bottom: 20px;
+    border-radius: 8px;
+  }
+  
+  #login:target, #signup:target {
+    display: block;
+    border: 3px solid yellow;
+  }
+  
+  input, button {
+    background: #FFF;
+    color: #000;
+    font-size: 18px; 
+    padding: 12px;
+    border: 3px solid #FFF;
+    width: 100%; 
+    margin-bottom: 20px;
+    margin-top: 20px;
+    box-sizing: border-box; 
+  }
+  
+  button {
+    background-color: #FFD700; 
+    color: #000;
+    font-weight: bold;
+    border-radius: 6px;
+    cursor: pointer;
+  }
+  
+  button:hover, button:focus {
+    background-color: #FFA500;
+    border: 3px solid white;
+  }
+  
+  a, button, input {
+    outline: 3px solid yellow;
+    transition: all 0.2s ease-in-out;
+  }
+  
+  a:focus, button:focus, input:focus {
+    background-color: #444;
+    border: 3px solid #FFD700;
+    text-decoration: underline;
+  }
+
+  #projetos {
+    font-size: 18px;
+  }
+
+  #usuarios {
+    font-size: 18px;
+  }
+  
+  .error {
+    color: red;
+    font-weight: bold;
+    background-color: yellow;
+    padding: 10px;
+    border: 2px solid red;
+    display: block;
+    margin-bottom: 15px;
+  }
+
+  .acoes {
+    display: flex;
+    gap: 10px;
+    display: nowrap;
+    padding-left: 4vh;
+    padding-top: 2vh;
+}
+
+  .acoes button {
+    white-space: nowrap;
+}

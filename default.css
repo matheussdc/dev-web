@@ -14,44 +14,67 @@ header {
     text-align: center;
 }
 
-nav button {
-    background: white;
-    color: #007BFF;
-    border: 1px solid #007BFF;
-    padding: 0.5em 1em;
-    cursor: pointer;
-    margin: 0.5em;
+nav {
+    text-align: center;
+    margin: 10px 0;
 }
 
-table {
-    width: 100%;
-    border-collapse: collapse;
-    margin: 20px 0;
+.tab-buttons {
+    text-align: center;
+    margin-bottom: 20px;
+    margin-top: 20px;
 }
 
-table th, table td {
-    border: 1px solid #ddd;
-    padding: 8px;
-}
-
-table th {
-    background-color: #007BFF;
+.tab {
+    display: inline-block;
+    background: #007BFF;
     color: white;
+    padding: 10px 20px;
+    text-decoration: none;
+    border-radius: 5px;
+    margin: 0 10px;
+}
+
+.tab:hover {
+    background: #0056b3;
+}
+
+.form-section {
+    display: none;
+    text-align: center;
+    max-width: 350px; 
+    margin: 0 auto;
+    background: white;
+    padding: 20px;
+    border-radius: 5px;
+    box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.1);
+}
+
+.form-section h2 {
+    font-size: 20px; 
+    margin-bottom: 10px;
+}
+
+input {
+    width: 90%; 
+    max-width: 300px; 
+    padding: 8px;
+    margin: 5px 0;
+    font-size: 14px;
 }
 
 button {
-    background: #28a745;
-    color: white;
-    border: none;
-    padding: 0.5em 1em;
-    cursor: pointer;
+    width: 100%; 
+    max-width: 49vh; 
+    padding: 8px;
+    margin-top: 20px;
+    font-size: 14px;
 }
 
 button:hover {
     background: #218838;
-    color: white;
 }
 
-form {
-    display: none;
+#login:target, #signup:target {
+    display: block;
 }
