@@ -31,7 +31,7 @@ nav a {
 }
 
 nav a:hover {
-    background: #007BFF; 
+    background: #FFC107; 
 }
 
 .tab-buttons {
@@ -51,7 +51,7 @@ nav a:hover {
 }
 
 .tab-buttons a:hover {
-    background-color: #007BFF; 
+    background-color: #FFC107; 
 }
 
 .form-section {
@@ -82,15 +82,15 @@ nav a:hover {
 }
 
 .close-btn:hover {
-    background: #007BFF; 
+    background: #FFC107; 
 }
 
 #salvar {
-    background-color: #007BFF; 
+    background-color: #FFC107; 
     color: #000; 
     text-decoration: none;
     border-radius: 5px;
-    border-color: #007BFF;
+
 }
 
 .table-container {
@@ -151,11 +151,11 @@ button:first-child {
 }
 
 button:first-child:hover {
-    background: #007BFF; 
+    background: #FFC107; 
 }
 
 button:last-child {
-    background: red;
+    background: #B40000;
     color: white;
 }
 
