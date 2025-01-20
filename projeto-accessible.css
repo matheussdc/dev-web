@@ -139,7 +139,6 @@ body {
   .acoes {
     display: flex;
     gap: 10px;
-    display: nowrap;
     padding-left: 4vh;
     padding-top: 2vh;
 }
