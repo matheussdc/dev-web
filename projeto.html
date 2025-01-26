@@ -4,18 +4,31 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Gerenciamento de Projetos</title>
-    <link rel="stylesheet" href="projeto.css">
+    <link id="cssFile" rel="stylesheet" href="projeto.css">
+    <script>
+        function changeCSS(element) {
+            css = document.getElementById("cssFile");
+            css.href = element.getAttribute("data-cssAlt");
+            troca = css.href.includes("projeto.css") ? "projeto-accessible.css" : "projeto.css";
+            element.setAttribute("data-cssAlt", troca);
+            defaulttxt = "Versão Acessível";
+            alttxt = "Voltar para Versão Padrão";
+            txt = css.href.includes("projeto.css") ? defaulttxt : alttxt;
+            element.innerHTML = txt;
+        }
+    </script>
 </head>
 <body>
     <header>
         <h1>Gerenciamento de Projetos</h1>
         <nav>
-            <a href="projeto-accessible.html">Versão Acessível</a>
+            <a href="javascript:;" onclick="changeCSS(this)" data-cssAlt="projeto-accessible.css">Versão Acessível</a>
         </nav>
     </header>
 
     <main>
-        <div class="form-container">
+        <div class="columns">
+        <section class="form-container">
             <fieldset>
                 <legend>Seleção de Projeto</legend>
                 <label for="projetos">Projetos:</label>
@@ -23,18 +36,18 @@
                     <option>Projeto 1</option>
                     <option>Projeto 2</option>
                 </select>
-                <button aria-label="Adicionar usuário ao projeto">Adicionar Usuário</button>
             </fieldset>
-        
+            
             <fieldset>
-                <legend>Usuários</legend>
+                <legend>Conceder Acesso</legend>
                 <label for="usuarios">Usuários:</label>
                 <select id="usuarios" name="usuarios">
-                    <option>João Silva</option>
-                    <option>Pedro Carlos</option>
+                    <option value="001">João Silva</option>
+                    <option value="003">Pedro Carlos</option>
                 </select>
+                <button class="adicionar-btn" aria-label="Adicionar usuário ao projeto">Adicionar Usuário</button>
             </fieldset>
-        </div>
+        </section>
         
 
         <section class="table-container">
@@ -43,11 +56,11 @@
                 <table>
                     <thead>
                         <tr>
-                            <th>Nome Completo</th>
-                            <th>Cargo</th>
-                            <th>Email</th>
-                            <th>Nível de Acesso</th>
-                            <th>Ações</th>
+                            <th scope="col">Nome Completo</th>
+                            <th scope="col">Cargo</th>
+                            <th scope="col">Email</th>
+                            <th scope="col">Nível de Acesso</th>
+                            <th scope="col">Ações</th>
                         </tr>
                     </thead>
                     <tbody>
@@ -56,16 +69,17 @@
                             <td>Engenheiro</td>
                             <td>joao@exemplo.com</td>
                             <td>Nível 2</td>
-                            <td class="acoes">
-                                <button>Alterar Nível</button>
-                                <button>Remover do Projeto</button>
-                                <button>Remover Conta</button>
+                            <td>
+                                <button class="nivel">Alterar Nível</button>
+                                <button class="acesso">Remover do Projeto</button>
+                                <button class="remover">Remover Conta</button>
                             </td>
                         </tr>
                     </tbody>
                 </table>
             </div>
         </section>
+        </div>
     </main>
 </body>
 </html>

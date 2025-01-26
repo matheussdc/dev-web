@@ -83,7 +83,7 @@ button:hover {
 }
 
 .table-container {
-    max-width: 800px;
+    max-width: 1000px;
     margin: 20px auto;
     background: white;
     padding: 20px;
@@ -124,4 +124,9 @@ td button {
     width: auto;
     padding: 5px 10px;
     font-size: 14px;
+}
+
+.columns {
+    display: flex;
+    align-items: baseline;
 }

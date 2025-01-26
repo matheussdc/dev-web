@@ -4,14 +4,26 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Página do Usuário</title>
-    <link rel="stylesheet" href="user.css">
+    <link id="cssFile" rel="stylesheet" href="user.css">
+    <script>
+        function changeCSS(element) {
+            css = document.getElementById("cssFile");
+            css.href = element.getAttribute("data-cssAlt");
+            troca = css.href.includes("user.css") ? "user-accessible.css" : "user.css";
+            element.setAttribute("data-cssAlt", troca);
+            defaulttxt = "Versão Acessível";
+            alttxt = "Voltar para Versão Padrão";
+            txt = css.href.includes("user.css") ? defaulttxt : alttxt;
+            element.innerHTML = txt;
+        }
+    </script>
 </head>
 <body>
     <header>
         <h1>Bem-vindo, [Nome do Usuário]</h1>
         <nav>
             <a href="projeto.html">Gerenciar Projetos</a>
-            <a href="user-accessible.html">Versão Acessível</a>
+            <a href="javascript:;" onclick="changeCSS(this)" data-cssAlt="user-accessible.css">Versão Acessível</a>
         </nav>
     </header>
 
@@ -20,7 +32,7 @@
             <a href="#projetos">Projetos</a>
             <a href="#registro">Novo Registro</a>
         </div>
-
+        <div class="columns">
         <section id="projetos" class="form-section">
             <h2>Projetos</h2>
             <label for="projeto-select">Selecione um projeto:</label>
@@ -101,6 +113,7 @@
                 </table>
             </div>
         </section>
+        </div>
     </main>
 </body>
 </html>
