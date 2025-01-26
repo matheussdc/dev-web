@@ -1,3 +1,7 @@
+* {
+  box-sizing: border-box;
+}
+
 body {
   background-color: #000;
   color: #FFF;
@@ -23,6 +27,14 @@ header, footer {
   margin-bottom: 20px;
 }
 
+nav {
+  text-align: center;
+  margin: 10px 0;
+  display: flex;
+  justify-content: center;
+  column-gap: 20px;
+}
+
 nav a {
   text-decoration: none;
   color: #000;
@@ -36,7 +48,8 @@ nav a:hover {
 }
 
 .form-container {
-  max-width: 70vw;
+  max-width: 30vw;
+  width: 90%;
   background: #111;
   color: #FFD700;
   border: 2px solid #FFD700;
@@ -94,6 +107,10 @@ th, td {
   border-bottom: 1px solid #FFD700; 
 }
 
+td button {
+  width: auto;
+}
+
 tbody tr:nth-child(even) {
   background: #111; 
 }
@@ -102,12 +119,21 @@ tbody tr:hover {
   background: #222; 
 }
 
+select, input {
+  width: 100%;
+  padding: 10px;
+  margin-top: 5px;
+  font-size: 16px;
+  border-radius: 5px;
+}
+
 button {
   padding: 5px 10px;
   border: none;
   cursor: pointer;
   border-radius: 3px;
   font-size: 14px;
+  width: 100%;
 }
 
 button:last-child {
@@ -128,15 +154,6 @@ button:hover {
   background: #FFC107; 
 }
 
-#adicionar-btn {
-  background: #FFD700;
-  color: #000; 
-}
-
-#adicionar-btn:hover {
-  background: #FFC107; 
-}
-
 .columns {
   display: flex;
   align-items: baseline;
@@ -145,4 +162,16 @@ button:hover {
 fieldset {
   border-style: solid;
   border-color: #FFD700;
+}
+
+fieldset .adicionar-btn {
+  background-color: #FFD700;
+  color: #000;
+  height: fit-content;
+  padding: 10px;
+  margin-top: 5px;
+}
+
+fieldset .adicionar-btn:hover {
+  background-color: #FFC107;
 }

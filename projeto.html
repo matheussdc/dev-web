@@ -20,15 +20,17 @@
 </head>
 <body>
     <header>
-        <h1>Gerenciamento de Projetos</h1>
+        <h1>Gerenciamento de Projetos e Permissões de Usuários</h1>
+        <h2>Humberto Monte - Nível de Acesso 3: Administrador</h2>
         <nav>
+            <a href="user.html">Gerenciar Testes</a>
             <a href="javascript:;" onclick="changeCSS(this)" data-cssAlt="projeto-accessible.css">Versão Acessível</a>
         </nav>
     </header>
 
     <main>
         <div class="columns">
-        <section class="form-container">
+        <div class="form-container">
             <fieldset>
                 <legend>Seleção de Projeto</legend>
                 <label for="projetos">Projetos:</label>
@@ -47,7 +49,15 @@
                 </select>
                 <button class="adicionar-btn" aria-label="Adicionar usuário ao projeto">Adicionar Usuário</button>
             </fieldset>
-        </section>
+            
+            <fieldset>
+                <legend>Criar Novo Projeto</legend>
+                <label for="novo">Nome</label>
+                <input id="novo" type="text" placeholder="Nome do Projeto">
+                <button class="adicionar-btn" aria-label="Adicionar Projeto no Banco de Dados">Criar Projeto</button>
+
+            </fieldset>
+        </div>
         
 
         <section class="table-container">

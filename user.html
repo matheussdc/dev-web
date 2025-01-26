@@ -20,7 +20,8 @@
 </head>
 <body>
     <header>
-        <h1>Bem-vindo, [Nome do Usuário]</h1>
+        <h1>Monitoramento de Testes</h1>
+        <h2>Humberto Monte - Nível de Acesso 3: Administrador</h2>
         <nav>
             <a href="projeto.html">Gerenciar Projetos</a>
             <a href="javascript:;" onclick="changeCSS(this)" data-cssAlt="user-accessible.css">Versão Acessível</a>
@@ -41,6 +42,13 @@
                 <option>Projeto 2</option>
             </select>
             <a href="#" class="close-btn">Fechar</a>
+            <fieldset>
+                <legend style="font-weight: bold;">Informações do Projeto</legend>
+                <p>Total de Registros: 2</p>
+                <p>Testes Aprovados: 1</p>
+                <p>Testes Reprovados: 1 </p>
+            </fieldset>
+            
         </section>
 
         <section id="registro" class="form-section">
@@ -64,7 +72,10 @@
         </section>
 
         <section class="table-container">
-            <h2>Lista de Testes</h2>
+            <div class="table-header">
+                <h2>Registros de Testes do Projeto 1</h2>
+                <button class="download-btn">Download dos Registros</button>
+            </div>
             <div class="table-wrapper">
                 <table>
                     <thead>
