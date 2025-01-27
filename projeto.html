@@ -39,7 +39,12 @@
                     <option>Projeto 2</option>
                 </select>
             </fieldset>
-            
+
+            <fieldset>
+                <legend>Hardware Relacionado ao Projeto</legend>
+                <img src="images/18713-Raspberry_Pi_Zero_2_W-04_(cropped).jpg" alt="Hardware Associado ao Projeto 1" style="width: 100%;max-height: 400px;">
+            </fieldset>
+
             <fieldset>
                 <legend>Conceder Acesso</legend>
                 <label for="usuarios">Usuários:</label>
@@ -54,14 +59,15 @@
                 <legend>Criar Novo Projeto</legend>
                 <label for="novo">Nome</label>
                 <input id="novo" type="text" placeholder="Nome do Projeto">
+                <label for="imagem">Imagem do Hardware</label>
+                <input id="imagem" type="file" accept="image/jpeg, image/png, image/jpg">
                 <button class="adicionar-btn" aria-label="Adicionar Projeto no Banco de Dados">Criar Projeto</button>
-
             </fieldset>
         </div>
         
 
         <section class="table-container">
-            <h2>Lista de Usuários</h2>
+            <h2>Lista de Usuários com Acesso ao Projeto 1</h2>
             <div class="table-wrapper">
                 <table>
                     <thead>

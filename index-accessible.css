@@ -29,13 +29,6 @@ footer {
   color: yellow;
 }
 
-main {
-  width: 100%;
-  max-width: 600px; 
-  padding: 20px;
-  box-sizing: border-box;
-}
-
 .tab-buttons {
   text-align: center;
   margin-bottom: 20px;
@@ -59,10 +52,10 @@ a:hover {
   display: none; 
   text-align: center;
   background: #111;
+  max-width: 400px;
+  margin: 0 auto;
   color: #FFF;
-  border: 2px solid #FFF;
   padding: 20px;
-  margin-bottom: 20px;
   border-radius: 5px;
 }
 
@@ -94,4 +87,36 @@ button:hover {
 
 a, button, input {
   outline: 2px solid yellow;
+}
+
+#descricao {
+  width: 90%;
+  max-width: 1300px;
+  margin: 20px auto;
+  background: #000; 
+  color: #FFD700; 
+  padding: 20px;
+  border-radius: 5px;
+  box-shadow: 0px 0px 10px rgba(255, 215, 0, 0.5); 
+  overflow: hidden;
+}
+
+div.img-container {
+  margin: 5px;
+  border: 1px solid #FFD700;
+  float: left;
+  width: 380px;
+}
+
+div.img-container:hover {
+  border: 1px solid #FFA500;
+}
+
+div.img-container img {
+  width: 100%;
+}
+
+div.desc {
+  padding: 15px;
+  text-align: center;
 }
