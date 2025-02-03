@@ -169,7 +169,7 @@ form {
     flex-direction: column;
 }
 
-input, select {
+input, select, .text-desc {
     font-size: 18px;
     padding: 10px;
     border: 2px solid #FFD700; 
@@ -216,3 +216,57 @@ fieldset {
     border-style: solid;
     border-color: #FFD700;
 }
+
+.text-desc {
+    resize: none;
+}
+
+#avaliacao {
+    accent-color: #FFD700;
+}
+
+.modal {
+    display: none;
+    position: fixed;
+    z-index: 1;
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    overflow: auto;
+    background-color: rgba(0, 0, 0, 0.4);
+  
+  }
+  
+  .modal-cell {
+    display: table-cell;
+    vertical-align: middle;
+  }
+  
+  .modal-content {
+    background-color: #333;
+    width: 50%;
+    margin: auto;
+  }
+  
+  /* The Close Button */
+  .close {
+    color: #333;
+    float: right;
+    font-size: 32px;
+    font-weight: bold;
+  }
+  
+  .close:hover, .close:focus {
+    color: #000;
+    text-decoration: none;
+    cursor: pointer;
+  }
+  
+  .modal-header {
+    padding: 2px 16px;
+    background-color: #FFD700;
+    color: #333;
+  }
+  
+  .modal-body {padding: 2px 16px;}
