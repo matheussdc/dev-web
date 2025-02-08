@@ -2,11 +2,13 @@
     {
         "id": 1,
         "nome": "Caviar Azul",
-        "imagem": "arm32.jpeg"
+        "imagem": "arm_stm32.jpeg",
+        "usuarios": [1, 2, 3]
     },
     {
         "id": 2,
         "nome": "Penhasco Lilás",
-        "imagem": "stf4pgkmn.jpeg"
+        "imagem": "18713-Raspberry_Pi_Zero_2_W-04_(cropped).jpg",
+        "usuarios": [1, 3]
     }
 ]

@@ -5,7 +5,8 @@
         "cargo": "Engenheiro de Dados",
         "email": "magnao@gmail.com",
         "senha": "123-cripto",
-        "nivel": 2
+        "nivel": 2,
+        "projetos": [1, 2]
     },
     {
         "id": 2,
@@ -13,7 +14,8 @@
         "cargo": "Estagiário de QA",
         "email": "borginhos@hotmail.com",
         "senha": "123-456",
-        "nivel": 1
+        "nivel": 1,
+        "projetos": [1]
     },
     {
         "id": 3,
@@ -21,6 +23,7 @@
         "cargo": "CEO",
         "email": "cel_maioral@gmail.com",
         "senha": "abcdef",
-        "nivel": 3
+        "nivel": 3,
+        "projetos": [1, 2]
     }
 ]

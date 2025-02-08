@@ -7,20 +7,20 @@
     <link id="cssFile" rel="stylesheet" href="/css/user.css">
     <script src="/js/user.js"></script>
 </head>
-<body>
+<body onload="init()">
     <header>
         <h1>Monitoramento de Testes</h1>
-        <h2><%= user %> -
-        <% if (nivel == 1) { %>
+        <h2><%= usuario.nome %> -
+        <% if (usuario.nivel == 1) { %>
             Nível de Acesso 1: Analista de Dados
-        <% } else if (nivel == 2) { %>
+        <% } else if (usuario.nivel == 2) { %>
             Nível de Acesso 2: Gerente de Testes
-        <% } else if (nivel == 3) { %>
+        <% } else if (usuario.nivel == 3) { %>
             Nível de Acesso 3: Administrador
         <% } %>
         </h2>
         <nav>
-            <% if (nivel == 3) { %>
+            <% if (usuario.nivel == 3) { %>
                 <a href="projeto.html">Gerenciar Projetos</a>
             <% } %>
             <a href="javascript:;" onclick="changeCSS(this)" data-cssAlt="/css/user-accessible.css">Versão Acessível</a>
@@ -30,7 +30,7 @@
     <main>
         <div class="tab-buttons">
             <a href="#projetos">Projetos</a>
-            <% if ([2, 3].includes(nivel)) { %>
+            <% if ([2, 3].includes(usuario.nivel)) { %>
                 <a href="#registro">Novo Registro</a>
             <% } %>
         </div>
@@ -39,8 +39,9 @@
             <h2>Projetos</h2>
             <label for="projeto-select">Selecione um projeto:</label>
             <select id="projeto-select" name="projeto-select">
-                <option onclick="getTestes(this)" value="1">Projeto 1</option>
-                <option onclick="getTestes(this)" value="2">Projeto 2</option>
+                <% projetosUser.forEach(projeto => { %>
+                    <option onclick="getTestes(this)" value="<%- projeto.id %>"><%= projeto.nome %></option>
+                <% }) %>
             </select>
             <a href="#" class="close-btn">Fechar</a>
             <fieldset id="informacoes">
@@ -53,7 +54,7 @@
             </fieldset>
         </section>
 
-        <% if ([2, 3].includes(nivel)) { %>
+        <% if ([2, 3].includes(usuario.nivel)) { %>
         <section id="registro" class="form-section">
             <h2>Adicionar Registro</h2>
             <form action="/add_teste" method="post" oninput="nota.value=parseInt(avaliacao.value)">
@@ -82,7 +83,7 @@
 
         <section class="table-container">
             <div class="table-header">
-                <h2>Registros de Testes do Projeto 1</h2>
+                <h2>Registros de Testes</h2>
                 <button class="download-btn">Download dos Registros</button>
             </div>
             <div class="table-wrapper">
@@ -99,7 +100,7 @@
                             <th>Avaliação</th>
                             <th>Resultado</th>
                             <th>Detalhes</th>
-                            <% if ([2, 3].includes(nivel)) { %>
+                            <% if ([2, 3].includes(usuario.nivel)) { %>
                             <th>Ações</th>
                             <% } %>
                         </tr>

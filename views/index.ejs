@@ -5,7 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Monitoramento de Testes - Acessível</title>
     <link id="cssFile" rel="stylesheet" href="/css/index.css">
-    <script src="/js/index.html"></script>
+    <script src="/js/index.js"></script>
 </head>
 <body>
     <header>
@@ -72,23 +72,18 @@
                 Administrador - Gerenciamento de permissões, pode deletar registro de testes</p>
             <hr>
             <h2>Informações atualizadas sobre o sistema</h2>
-                <p>Número de Testes Realizados: 100+</p>
-                <p>Número de Projetos Cadastrados: 5+</p>
+                <p>Número de Testes Realizados: <%= total_testes %></p>
+                <p>Número de Projetos Cadastrados: <%= total_projetos %></p>
                 <p>Últimos Hardwares Cadastrados:</p>
                 <div class="galeria">
-                    <div class="img-container">
-                        <img width="430" height="300" alt="Projeto 1" src="images/18713-Raspberry_Pi_Zero_2_W-04_(cropped).jpg">
-                        <div class="desc">
-                            Projeto 1
+                    <% imagens.forEach(img => { %>
+                        <div class="img-container">
+                            <img width="430" height="300" alt="<%= img.projeto %>" src="images/<%= img.src %>">
+                            <div class="desc">
+                                <%= img.projeto %>
+                            </div>
                         </div>
-                    </div>
-                    <div class="img-container">
-                        <img width="430" height="300" alt="Projeto 2" src="images/arm_stm32.jpeg">
-                        <div class="desc">
-                            Projeto 2
-                        </div>
-                    </div>
-                    
+                    <% }) %>
                 </div>
         </section>
     </main>

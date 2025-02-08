@@ -25,7 +25,7 @@ function openmodal(btn){
 }
 async function getTestes(projeto) {
     var projeto_id = projeto.getAttribute("value");
-    
+    var projeto_nome = projeto.innerText;
     try {
         const url = `/testes/${projeto_id}`
         const response = await fetch(url)
@@ -52,6 +52,8 @@ async function getTestes(projeto) {
 
         //cookies = document.cookie.split("; ")
         //console.log(cookies.find((cookieKey) => cookieKey.startsWith("nivel")).split("=")[1])
+        const theader = document.querySelector(".table-header h2")
+        theader.innerText = `Registros de Testes - ${projeto_nome}`
         const tbody = document.querySelector("tbody")
         tbody.innerHTML = ""
 
@@ -92,4 +94,8 @@ async function getTestes(projeto) {
     catch (error) {
         console.error(error.message)
     }
+}
+//onload
+function init() {
+    window.location.hash = "projetos";
 }

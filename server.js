@@ -13,12 +13,38 @@ app.listen(porta, function () {
 	console.log(`Server listening on port ${porta}`)
 })
 
-usuario = {
-			user: "Gomes de Matos",
-			nivel: 2
-		  }
+const users = require('./data/usuarios.json')
+const projetos = require('./data/projetos.json')
+const usuario = users[0]
+const projetosUser = usuario.projetos.map(projetoId => {
+	const projeto = projetos.find(p => p.id === projetoId);
+    return { id: projeto.id, nome: projeto.nome };
+});
 
-app.get('/' , (req, res) => res.render('user', usuario))
+app.get('/', (req, res) => {
+	try {
+		const projetos = require('./data/projetos.json')
+		const total_projetos = projetos.length
+		const imagens = []
+		for(let i = 1; i <= 3 && i <= total_projetos; i++) {
+			imagens.push({ src: projetos.at(-i).imagem, projeto: projetos.at(-i).nome })
+		}
+
+		let total_testes = 0
+		const testes = fs.readdirSync('./data/testes')
+		testes.forEach(arquivo => {
+			total_testes += JSON.parse(fs.readFileSync(`./data/testes/${arquivo}`)).length
+		})
+
+
+		res.render('index', { imagens, total_testes, total_projetos })
+	}
+	catch (error) {
+		console.error(error.message)
+		res.sendStatus(404)
+	}
+})
+app.get('/user', (req, res) => res.render('user', { usuario, projetosUser }))
 
 /* Rota pro fetch async do cliente para preencher as tabelas */
 app.get('/testes/:id', (req, res) => {
