@@ -13,14 +13,7 @@ app.listen(porta, function () {
 	console.log(`Server listening on port ${porta}`)
 })
 
-const users = require('./data/usuarios.json')
-const projetos = require('./data/projetos.json')
-const usuario = users[0]
-const projetosUser = usuario.projetos.map(projetoId => {
-	const projeto = projetos.find(p => p.id === projetoId);
-    return { id: projeto.id, nome: projeto.nome };
-});
-
+/* Rota root index */
 app.get('/', (req, res) => {
 	try {
 		const projetos = require('./data/projetos.json')
@@ -29,7 +22,7 @@ app.get('/', (req, res) => {
 		for(let i = 1; i <= 3 && i <= total_projetos; i++) {
 			imagens.push({ src: projetos.at(-i).imagem, projeto: projetos.at(-i).nome })
 		}
-
+		
 		let total_testes = 0
 		const testes = fs.readdirSync('./data/testes')
 		testes.forEach(arquivo => {
@@ -44,14 +37,74 @@ app.get('/', (req, res) => {
 		res.sendStatus(404)
 	}
 })
-app.get('/user', (req, res) => res.render('user', { usuario, projetosUser }))
+
+const userIndex = 2; //pra tesar o usuario
+
+app.get('/user', (req, res) => {
+	try {
+		const users = require('./data/usuarios.json')
+		const usuario = users[userIndex]
+		const projetos = require('./data/projetos.json')
+		const projetosUser = usuario.projetos.map(projetoId => {
+			const projeto = projetos.find(p => p.id === projetoId);
+			return { id: projeto.id, nome: projeto.nome };
+		});
+		res.render('user', { usuario, projetosUser })
+	}
+	catch (error) {
+		console.error(error.message)
+		res.sendStatus(404)
+	}
+})
+
+app.get('/projeto', (req, res) => {
+	try {
+		const users = require('./data/usuarios.json')
+		const usuario = users[userIndex]
+		const lista = users.map(user => {return { id:user.id, nome: user.nome }})
+		const projetosJSON = require('./data/projetos.json')
+		const projetos = projetosJSON.map(projeto => {return { id: projeto.id, nome: projeto.nome }})
+		if(usuario.nivel == 3) {
+			res.render('projeto', { usuario, projetos, lista })
+		}
+		else {
+			res.redirect(req.header.referer)
+		}
+	}
+	catch (error) {
+		console.error(error.message)
+		res.sendStatus(404)
+	}
+})
 
 /* Rota pro fetch async do cliente para preencher as tabelas */
 app.get('/testes/:id', (req, res) => {
 	try{
+		const users = require('./data/usuarios.json')
+		const usuario = users[userIndex]
 		const testes = JSON.parse(fs.readFileSync(`data/testes/projeto${req.params.id}.json`))
 		testes.push({ nivel: usuario.nivel}) //usar session token pra isso
 		res.send(testes)
+	}
+	catch (error) {
+		console.error(error.message)
+		res.sendStatus(404)
+	}
+})
+
+app.get('/lista/:id', (req, res) => {
+	try {
+		const users = require('./data/usuarios.json')
+		const projetos = require('./data/projetos.json')
+		const projeto = projetos.find(projeto =>  projeto.id == req.params.id)
+
+		const lista = projeto.usuarios.map(userID => {
+			const usuario = users.find(u => u.id === userID);
+			return usuario
+		});
+
+		const imagem = projeto.imagem
+		res.send({ lista, imagem })
 	}
 	catch (error) {
 		console.error(error.message)

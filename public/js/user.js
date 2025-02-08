@@ -89,7 +89,6 @@ async function getTestes(projeto) {
             row += "</tr>"
             tbody.innerHTML += row
         })
-        console.log(descricoes)
     }
     catch (error) {
         console.error(error.message)
