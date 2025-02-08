@@ -1,0 +1,38 @@
+[
+    {
+        "id": "001",
+        "hardware": "4002",
+        "modelo": "Passarinho Americano",
+        "temperatura": 15,
+        "pressao": 50,
+        "altura": 2,
+        "data": "05-02-2025",
+        "avaliacao": 10,
+        "resultado": true,
+        "detalhes": "Por um triz isso não funciona"
+    },
+    {
+        "id": "002",
+        "hardware": "8922",
+        "modelo": "Madureira",
+        "temperatura": 76,
+        "pressao": 44,
+        "altura": 70,
+        "data": "29-01-2025",
+        "avaliacao": 9,
+        "resultado": false,
+        "detalhes": "A entrada USB fica solta ao cair do limite de altura"
+    },
+    {
+        "id": "003",
+        "hardware": "2025",
+        "modelo": "Guitarra Z++",
+        "temperatura": 50,
+        "pressao": 1002,
+        "altura": 10,
+        "data": "30-02-2025",
+        "avaliacao": 2,
+        "resultado": false,
+        "detalhes": "Deu tudo errado nesse aqui"
+    }
+]

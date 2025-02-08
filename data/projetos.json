@@ -1,0 +1,12 @@
+[
+    {
+        "id": 1,
+        "nome": "Caviar Azul",
+        "imagem": "arm32.jpeg"
+    },
+    {
+        "id": 2,
+        "nome": "Penhasco Lilás",
+        "imagem": "stf4pgkmn.jpeg"
+    }
+]

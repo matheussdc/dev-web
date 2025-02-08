@@ -4,26 +4,14 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Monitoramento de Testes - Acessível</title>
-    <link id="cssFile" rel="stylesheet" href="index.css">
-    
-    <script>
-        function changeCSS(element) {
-            css = document.getElementById("cssFile");
-            css.href = element.getAttribute("data-cssAlt");
-            troca = css.href.includes("index.css") ? "index-accessible.css" : "index.css";
-            element.setAttribute("data-cssAlt", troca);
-            defaulttxt = "Versão Acessível";
-            alttxt = "Voltar para Versão Padrão";
-            txt = css.href.includes("index.css") ? defaulttxt : alttxt;
-            element.innerHTML = txt;
-        }
-    </script>
+    <link id="cssFile" rel="stylesheet" href="/css/index.css">
+    <script src="/js/index.html"></script>
 </head>
 <body>
     <header>
         <h1>Sistema de Monitoramento de Testes de Hardware</h1>
         <nav>
-            <a class="tab" href="javascript:;" onclick="changeCSS(this)" data-cssAlt="index-accessible.css">Versão Acessível</a>
+            <a class="tab" href="javascript:;" onclick="changeCSS(this)" data-cssAlt="/css/index-accessible.css">Versão Acessível</a>
         </nav>
     </header>
 

@@ -4,19 +4,8 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Gerenciamento de Projetos</title>
-    <link id="cssFile" rel="stylesheet" href="projeto.css">
-    <script>
-        function changeCSS(element) {
-            css = document.getElementById("cssFile");
-            css.href = element.getAttribute("data-cssAlt");
-            troca = css.href.includes("projeto.css") ? "projeto-accessible.css" : "projeto.css";
-            element.setAttribute("data-cssAlt", troca);
-            defaulttxt = "Versão Acessível";
-            alttxt = "Voltar para Versão Padrão";
-            txt = css.href.includes("projeto.css") ? defaulttxt : alttxt;
-            element.innerHTML = txt;
-        }
-    </script>
+    <link id="cssFile" rel="stylesheet" href="/css/projeto.css">
+    <script src="/js/projeto.js"></script>
 </head>
 <body>
     <header>
@@ -24,7 +13,7 @@
         <h2>Humberto Monte - Nível de Acesso 3: Administrador</h2>
         <nav>
             <a href="user.html">Gerenciar Testes</a>
-            <a href="javascript:;" onclick="changeCSS(this)" data-cssAlt="projeto-accessible.css">Versão Acessível</a>
+            <a href="javascript:;" onclick="changeCSS(this)" data-cssAlt="/css/projeto-accessible.css">Versão Acessível</a>
         </nav>
     </header>
 

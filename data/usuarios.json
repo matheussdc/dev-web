@@ -1,0 +1,26 @@
+[
+    {
+        "id": 1,
+        "nome": "Alberto Magno",
+        "cargo": "Engenheiro de Dados",
+        "email": "magnao@gmail.com",
+        "senha": "123-cripto",
+        "nivel": 2
+    },
+    {
+        "id": 2,
+        "nome": "Borges de Melo",
+        "cargo": "Estagiário de QA",
+        "email": "borginhos@hotmail.com",
+        "senha": "123-456",
+        "nivel": 1
+    },
+    {
+        "id": 3,
+        "nome": "Coronel Carvalho",
+        "cargo": "CEO",
+        "email": "cel_maioral@gmail.com",
+        "senha": "abcdef",
+        "nivel": 3
+    }
+]
