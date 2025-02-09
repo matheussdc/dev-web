@@ -133,7 +133,6 @@ button {
   cursor: pointer;
   border-radius: 3px;
   font-size: 14px;
-  width: 100%;
 }
 
 button:last-child {
@@ -170,8 +169,28 @@ fieldset .adicionar-btn {
   height: fit-content;
   padding: 10px;
   margin-top: 5px;
+  width: 100%;
 }
 
 fieldset .adicionar-btn:hover {
   background-color: #FFC107;
+}
+
+.font-controls {
+  position: fixed;
+  top: 10px;
+  right: 10px;
+  background: rgba(255, 255, 255, 0.5);
+  padding: 10px;
+  border-radius: 5px;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+}
+
+.font-controls button {
+  background-color: #FFC107;
+  color: #000;
+  font-size: 18px;
+  margin: 0 5px;
+  padding: 5px 10px;
+  cursor: pointer;
 }

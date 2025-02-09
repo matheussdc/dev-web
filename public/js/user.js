@@ -1,15 +1,5 @@
 const descricoes = {}
 
-function changeCSS(element) {
-    css = document.getElementById("cssFile");
-    css.href = element.getAttribute("data-cssAlt");
-    troca = css.href.includes("/css/user.css") ? "/css/user-accessible.css" : "/css/user.css";
-    element.setAttribute("data-cssAlt", troca);
-    defaulttxt = "Versão Acessível";
-    alttxt = "Voltar para Versão Padrão";
-    txt = css.href.includes("/css/user.css") ? defaulttxt : alttxt;
-    element.innerHTML = txt;
-}
 function openmodal(btn){
     var row = btn.parentNode.parentNode;
     var valor = row.cells[0].innerText
@@ -23,6 +13,7 @@ function openmodal(btn){
     body.innerHTML = `<p>${descricoes[valor]}<p>`
     span.onclick = function() {modal.style.display = "none";}
 }
+
 async function getTestes(projeto) {
     var projeto_id = projeto.getAttribute("value");
     var projeto_nome = projeto.innerText;
@@ -50,8 +41,6 @@ async function getTestes(projeto) {
                     <p>Testes Aprovados: ${tot_aprovados}</p>
                     <p>Testes Reprovados: ${tot_reprovados}</p>`
 
-        //cookies = document.cookie.split("; ")
-        //console.log(cookies.find((cookieKey) => cookieKey.startsWith("nivel")).split("=")[1])
         const theader = document.querySelector(".table-header h2")
         theader.innerText = `Registros de Testes - ${projeto_nome}`
         const tbody = document.querySelector("tbody")
@@ -94,7 +83,8 @@ async function getTestes(projeto) {
         console.error(error.message)
     }
 }
+
 //onload
-function init() {
+function initial() {
     window.location.hash = "projetos";
 }

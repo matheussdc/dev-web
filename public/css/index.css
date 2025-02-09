@@ -77,11 +77,17 @@ input {
 }
 
 button {
-    width: 100%; 
-    max-width: 49vh; 
-    padding: 8px;
-    margin-top: 20px;
+    padding: 5px 10px;
+    border: none;
+    cursor: pointer;
+    border-radius: 3px;
     font-size: 14px;
+    background: #007BFF;
+    color: white;
+}
+
+button:hover {
+    background: #0056b3;
 }
 
 #login:target, #signup:target {
@@ -104,17 +110,34 @@ div.img-container {
     border: 1px solid #ccc;
     float: left;
     width: 420px;
-  }
+}
   
-  div.img-container:hover {
+div.img-container:hover {
     border: 1px solid #777;
-  }
+}
   
-  div.img-container img {
+div.img-container img {
     width: 100%;
-  }
+}
   
-  div.desc {
+div.desc {
     padding: 15px;
     text-align: center;
-  }
+}
+
+.font-controls {
+    position: fixed;
+    top: 10px;
+    right: 10px;
+    background: rgba(255, 255, 255, 0.9);
+    padding: 10px;
+    border-radius: 5px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+}
+
+.font-controls button {
+    font-size: 18px;
+    margin: 0 5px;
+    padding: 5px 10px;
+    cursor: pointer;
+}
