@@ -1,0 +1,26 @@
+[
+    {
+        "id": "001",
+        "hardware": "123",
+        "modelo": "Modelo X",
+        "temperatura": 75,
+        "pressao": 1013,
+        "altura": 10,
+        "data": "01-01-2025",
+        "avaliacao": 10,
+        "resultado": true,
+        "detalhes": ""
+    },
+    {
+        "id": "002",
+        "hardware": "456",
+        "modelo": "X v2",
+        "temperatura": 85,
+        "pressao": 988,
+        "altura": 25,
+        "data": "15-01-2025",
+        "avaliacao": 8,
+        "resultado": false,
+        "detalhes": "Oieee sou uma descrição de teste pro teste 002 :D"
+    }
+]

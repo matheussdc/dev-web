@@ -4,28 +4,14 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Gerenciamento de Projetos</title>
-    <link id="cssFile" rel="stylesheet" href="projeto.css">
-    <script>
-        function changeCSS(element) {
-            css = document.getElementById("cssFile");
-            css.href = element.getAttribute("data-cssAlt");
-            troca = css.href.includes("projeto.css") ? "projeto-accessible.css" : "projeto.css";
-            element.setAttribute("data-cssAlt", troca);
-            defaulttxt = "Versão Acessível";
-            alttxt = "Voltar para Versão Padrão";
-            txt = css.href.includes("projeto.css") ? defaulttxt : alttxt;
-            element.innerHTML = txt;
-        }
-    </script>
+    <link id="cssFile" rel="stylesheet" href="/css/projeto.css">
 </head>
 <body>
     <header>
         <h1>Gerenciamento de Projetos e Permissões de Usuários</h1>
-        <h2>Humberto Monte - Nível de Acesso 3: Administrador</h2>
+        <h2><%= usuario.nome %> - Nível de Acesso 3: Administrador</h2>
         <nav>
-            <a href="user.html">Gerenciar Testes</a>
-            <a href="javascript:;" onclick="changeCSS(this)" data-cssAlt="projeto-accessible.css">Versão Acessível</a>
-        </nav>
+            <a href="/user/<%= usuario.id %>">Gerenciar Testes</a>
     </header>
 
     <main>
@@ -35,22 +21,24 @@
                 <legend>Seleção de Projeto</legend>
                 <label for="projetos">Projetos:</label>
                 <select id="projetos" name="projetos">
-                    <option>Projeto 1</option>
-                    <option>Projeto 2</option>
+                    <% projetos.forEach(projeto => { %>
+                        <option onclick="getUsers(this)" value="<%- projeto.id %>"><%= projeto.nome %></option>
+                    <% }) %>
                 </select>
             </fieldset>
 
             <fieldset>
                 <legend>Hardware Relacionado ao Projeto</legend>
-                <img src="images/18713-Raspberry_Pi_Zero_2_W-04_(cropped).jpg" alt="Hardware Associado ao Projeto 1" style="width: 100%;max-height: 400px;">
+                <img style="width: 100%;max-height: 400px;">
             </fieldset>
 
             <fieldset>
                 <legend>Conceder Acesso</legend>
                 <label for="usuarios">Usuários:</label>
                 <select id="usuarios" name="usuarios">
-                    <option value="001">João Silva</option>
-                    <option value="003">Pedro Carlos</option>
+                    <% lista.forEach(user => { %>
+                        <option onclick="addUser(this)" value="<%- user.id %>"><%= user.nome %></option>
+                    <% }) %>
                 </select>
                 <button class="adicionar-btn" aria-label="Adicionar usuário ao projeto">Adicionar Usuário</button>
             </fieldset>
@@ -67,7 +55,7 @@
         
 
         <section class="table-container">
-            <h2>Lista de Usuários com Acesso ao Projeto 1</h2>
+            <h2>Lista de Usuários com Acesso</h2>
             <div class="table-wrapper">
                 <table>
                     <thead>
@@ -80,22 +68,14 @@
                         </tr>
                     </thead>
                     <tbody>
-                        <tr>
-                            <td>João Silva</td>
-                            <td>Engenheiro</td>
-                            <td>joao@exemplo.com</td>
-                            <td>Nível 2</td>
-                            <td>
-                                <button class="nivel">Alterar Nível</button>
-                                <button class="acesso">Remover do Projeto</button>
-                                <button class="remover">Remover Conta</button>
-                            </td>
-                        </tr>
                     </tbody>
                 </table>
             </div>
         </section>
         </div>
     </main>
+    <%- include('font-control') %>
+    <script src="/js/projeto.js"></script>
+    <script src="/js/acessibilidade.js"></script>
 </body>
 </html>

@@ -64,7 +64,7 @@ a:hover {
   border: 3px solid yellow;
 }
 
-input, button {
+input {
   background: #FFF;
   color: #000;
   font-size: 18px; 
@@ -76,16 +76,23 @@ input, button {
 }
 
 button {
-  background-color: #FFD700; 
-  color: #000;
-  border-radius: 6px;
+  padding: 5px 10px;
+  border: none;
+  cursor: pointer;
+  border-radius: 3px;
+  font-size: 14px;
+}
+
+button {
+  background: #FFD700;
+  color: #000; 
 }
 
 button:hover {
-  background-color: #FFA500;
+  background: #FFC107; 
 }
 
-a, button, input {
+a, input {
   outline: 2px solid yellow;
 }
 
@@ -119,4 +126,21 @@ div.img-container img {
 div.desc {
   padding: 15px;
   text-align: center;
+}
+
+.font-controls {
+  position: fixed;
+  top: 10px;
+  right: 10px;
+  background: rgba(255, 255, 255, 0.5);
+  padding: 10px;
+  border-radius: 5px;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+}
+
+.font-controls button {
+  font-size: 18px;
+  margin: 0 5px;
+  padding: 5px 10px;
+  cursor: pointer;
 }

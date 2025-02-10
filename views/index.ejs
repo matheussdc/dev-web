@@ -4,27 +4,11 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Monitoramento de Testes - Acessível</title>
-    <link id="cssFile" rel="stylesheet" href="index.css">
-    
-    <script>
-        function changeCSS(element) {
-            css = document.getElementById("cssFile");
-            css.href = element.getAttribute("data-cssAlt");
-            troca = css.href.includes("index.css") ? "index-accessible.css" : "index.css";
-            element.setAttribute("data-cssAlt", troca);
-            defaulttxt = "Versão Acessível";
-            alttxt = "Voltar para Versão Padrão";
-            txt = css.href.includes("index.css") ? defaulttxt : alttxt;
-            element.innerHTML = txt;
-        }
-    </script>
+    <link id="cssFile" rel="stylesheet" href="/css/index.css">
 </head>
 <body>
     <header>
         <h1>Sistema de Monitoramento de Testes de Hardware</h1>
-        <nav>
-            <a class="tab" href="javascript:;" onclick="changeCSS(this)" data-cssAlt="index-accessible.css">Versão Acessível</a>
-        </nav>
     </header>
 
     <main>
@@ -32,7 +16,7 @@
             <a href="#login" class="tab">Login</a>
             <a href="#signup" class="tab">Cadastro</a>
         </div>
-
+        
         <section id="login" class="form-section">
             <h2>Login</h2>
             <form action="/login" method="POST">
@@ -84,29 +68,27 @@
                 Administrador - Gerenciamento de permissões, pode deletar registro de testes</p>
             <hr>
             <h2>Informações atualizadas sobre o sistema</h2>
-                <p>Número de Testes Realizados: 100+</p>
-                <p>Número de Projetos Cadastrados: 5+</p>
+                <p>Número de Testes Realizados: <%= total_testes %></p>
+                <p>Número de Projetos Cadastrados: <%= total_projetos %></p>
                 <p>Últimos Hardwares Cadastrados:</p>
                 <div class="galeria">
-                    <div class="img-container">
-                        <img width="430" height="300" alt="Projeto 1" src="images/18713-Raspberry_Pi_Zero_2_W-04_(cropped).jpg">
-                        <div class="desc">
-                            Projeto 1
+                    <% imagens.forEach(img => { %>
+                        <div class="img-container">
+                            <img width="430" height="300" alt="<%= img.projeto %>" src="images/<%= img.src %>">
+                            <div class="desc">
+                                <%= img.projeto %>
+                            </div>
                         </div>
-                    </div>
-                    <div class="img-container">
-                        <img width="430" height="300" alt="Projeto 2" src="images/arm_stm32.jpeg">
-                        <div class="desc">
-                            Projeto 2
-                        </div>
-                    </div>
-                    
+                    <% }) %>
                 </div>
         </section>
     </main>
+    <%- include('font-control') %>
 
     <footer>
         <p>&copy; 2025 - Monitoramento de Testes de Hardware</p>
     </footer>
+    <script src="/js/index.js"></script>
+    <script src="/js/acessibilidade.js"></script>
 </body>
 </html>
