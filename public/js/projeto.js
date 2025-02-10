@@ -24,7 +24,7 @@ async function getUsers(projeto) {
         theader.innerText = `Lista de Usuários com Acesso - ${projeto_nome}`
 
         const img = document.querySelector("fieldset img")
-        img.setAttribute("src", `images/${imagem}`)
+        img.setAttribute("src", `/images/${imagem}`)
         img.setAttribute("alt", `Hardware associado a ${projeto_nome}`)
 
         const tbody = document.querySelector("tbody")
@@ -48,4 +48,10 @@ async function getUsers(projeto) {
     catch (error) {    
         console.error(error.message)
     }
+}
+
+function addUser(usuario) {
+    const nome = usuario.innerText
+    const id = usuario.getAttribute("value")
+    console.log(`Função pra adicionar o ${nome} - ${id} selecionado ao projeto`)
 }

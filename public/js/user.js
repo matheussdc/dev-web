@@ -24,9 +24,7 @@ async function getTestes(projeto) {
         
         const testes = await response.json()
         let total = testes.length
-        const nivel = testes[total - 1].nivel
-        testes.pop()
-        total -= 1
+        const nivel = parseInt(document.querySelector("body").getAttribute("data-nivel"))
 
         tot_aprovados = testes.reduce((tot, current) => {
             tot += current.resultado;
@@ -65,7 +63,7 @@ async function getTestes(projeto) {
             } else {
                 row += "<td></td>"
             }
-
+            console.log("oie cheuggei com", nivel)
             if([2, 3].includes(nivel)) {
                 row += `<td>
                             <button>Editar</button>`

@@ -11,7 +11,7 @@
         <h1>Gerenciamento de Projetos e Permissões de Usuários</h1>
         <h2><%= usuario.nome %> - Nível de Acesso 3: Administrador</h2>
         <nav>
-            <a href="/user">Gerenciar Testes</a>
+            <a href="/user/<%= usuario.id %>">Gerenciar Testes</a>
     </header>
 
     <main>
@@ -37,7 +37,7 @@
                 <label for="usuarios">Usuários:</label>
                 <select id="usuarios" name="usuarios">
                     <% lista.forEach(user => { %>
-                        <option onclick="getUsers(this)" value="<%- user.id %>"><%= user.nome %></option>
+                        <option onclick="addUser(this)" value="<%- user.id %>"><%= user.nome %></option>
                     <% }) %>
                 </select>
                 <button class="adicionar-btn" aria-label="Adicionar usuário ao projeto">Adicionar Usuário</button>

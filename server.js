@@ -38,12 +38,23 @@ app.get('/', (req, res) => {
 	}
 })
 
-const userIndex = 2; //pra tesar o usuario
 
-app.get('/user', (req, res) => {
+app.post('/login', (req, res) => {
+	console.log(req.body)
+	const users = require('./data/usuarios.json')
+	const login = users.find(user => user.email == req.body.email && user.senha == req.body.password)
+	if(login) {
+		res.redirect(`/user/${login.id}`)
+	}
+	else {
+		res.status(404).redirect('/')
+	}
+})
+
+app.get('/user/:userid', (req, res) => {
 	try {
 		const users = require('./data/usuarios.json')
-		const usuario = users[userIndex]
+		const usuario = users.find(user => user.id == req.params.userid)
 		const projetos = require('./data/projetos.json')
 		const projetosUser = usuario.projetos.map(projetoId => {
 			const projeto = projetos.find(p => p.id === projetoId);
@@ -57,10 +68,10 @@ app.get('/user', (req, res) => {
 	}
 })
 
-app.get('/projeto', (req, res) => {
+app.get('/projeto/:userid', (req, res) => {
 	try {
 		const users = require('./data/usuarios.json')
-		const usuario = users[userIndex]
+		const usuario = users.find(user => user.id == req.params.userid)
 		const lista = users.map(user => {return { id:user.id, nome: user.nome }})
 		const projetosJSON = require('./data/projetos.json')
 		const projetos = projetosJSON.map(projeto => {return { id: projeto.id, nome: projeto.nome }})
@@ -77,13 +88,11 @@ app.get('/projeto', (req, res) => {
 	}
 })
 
-/* Rota pro fetch async do cliente para preencher as tabelas */
+/* Rota pro fetch no /user pra preencher as tabelas */
 app.get('/testes/:id', (req, res) => {
 	try{
 		const users = require('./data/usuarios.json')
-		const usuario = users[userIndex]
 		const testes = JSON.parse(fs.readFileSync(`data/testes/projeto${req.params.id}.json`))
-		testes.push({ nivel: usuario.nivel}) //usar session token pra isso
 		res.send(testes)
 	}
 	catch (error) {
@@ -92,6 +101,7 @@ app.get('/testes/:id', (req, res) => {
 	}
 })
 
+/* Rota pro fetch no /projeto pra preencher as tabelas*/
 app.get('/lista/:id', (req, res) => {
 	try {
 		const users = require('./data/usuarios.json')

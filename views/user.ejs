@@ -6,7 +6,7 @@
     <title>Página do Usuário</title>
     <link id="cssFile" rel="stylesheet" href="/css/user.css">
 </head>
-<body onload="initial()">
+<body onload="initial()" data-nivel="<%= usuario.nivel %>">
     <header>
         <h1>Monitoramento de Testes</h1>
         <h2><%= usuario.nome %> -
@@ -20,7 +20,7 @@
         </h2>
         <nav>
             <% if (usuario.nivel == 3) { %>
-                <a href="/projeto">Gerenciar Projetos</a>
+                <a href="/projeto/<%= usuario.id %>">Gerenciar Projetos</a>
             <% } %>
         </nav>
     </header>

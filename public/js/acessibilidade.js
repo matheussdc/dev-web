@@ -1,5 +1,4 @@
 function changeCSS() {
-    console.log(temaAtual)
     if(temaAtual.href.includes("accessible")) {
         makeDefault()
         localStorage.setItem("cssStyle", "default")
@@ -15,14 +14,12 @@ function makeDefault() {
     const file = fileCSS.split("-accessible")
     const fileDEFAULT = "/css/" + file[0] + (fileCSS.includes("accessible") ? file[1] : "")
     temaAtual.href = fileDEFAULT
-    console.log("fileCSS", fileCSS, "|| file", file, "|| fileDEF", fileDEFAULT)
 }
 function makeAccessible() {
     const fileCSS = temaAtual.href.split("/css/").at(-1)
     const file = fileCSS.split(".").at(0)
     const fileACCESSIBLE = "/css/" + file + "-accessible.css"
     temaAtual.href = fileACCESSIBLE
-    console.log("fileCSS", fileCSS, "|| file", file, "|| fileACCES", fileACCESSIBLE)
 }
 
 function ajusteFonte(tamanho) {
@@ -44,8 +41,13 @@ document.querySelector("#contrast").addEventListener("click", changeCSS)
 const temaAtual = document.querySelector("#cssFile")
 
 const salvoCSS = localStorage.getItem("cssStyle")
-if(salvoCSS.includes("accessible")) {makeAccessible()}
-else {makeDefault()}
+if(salvoCSS && salvoCSS.includes("accessible")) {
+    makeAccessible()
+}
+else {
+    makeDefault()
+    localStorage.setItem("cssStyle", "default")
+}
     
 
 const salvoFonte = localStorage.getItem("fontSize")

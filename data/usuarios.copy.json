@@ -3,8 +3,8 @@
         "id": 1,
         "nome": "Alberto Magno",
         "cargo": "Engenheiro de Dados",
-        "email": "magnao@gmail.com",
-        "senha": "123-cripto",
+        "email": "a@m.com",
+        "senha": "123123",
         "nivel": 2,
         "projetos": [1, 2]
     },
@@ -12,8 +12,8 @@
         "id": 2,
         "nome": "Borges de Melo",
         "cargo": "Estagiário de QA",
-        "email": "borginhos@hotmail.com",
-        "senha": "123-456",
+        "email": "b@m.com",
+        "senha": "123456",
         "nivel": 1,
         "projetos": [1]
     },
@@ -21,8 +21,8 @@
         "id": 3,
         "nome": "Coronel Carvalho",
         "cargo": "CEO",
-        "email": "cel_maioral@gmail.com",
-        "senha": "abcdef",
+        "email": "c@m.com",
+        "senha": "qweqwe",
         "nivel": 3,
         "projetos": [1, 2]
     }
