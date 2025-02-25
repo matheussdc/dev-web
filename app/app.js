@@ -1,36 +1,31 @@
 const express = require('express');
-const app = express() 
+const app = express();
+const axios = require('axios');
+//const multer = require(multer)
 const fs = require("fs");
 const validateForms = require('./src/validateForms.js')
-
 
 app.use(express.urlencoded({ extended: true }))
 app.use(express.static('public'));
 app.set('view engine', 'ejs')
+
+const url_api = 'http://localhost:8081' //`http://${process.env.HOST}:${process.env.PORT}`
 
 const porta = 8080
 app.listen(porta, function () {
 	console.log(`Server listening on port ${porta}`)
 })
 
-/* Rota root index */
-app.get('/', (req, res) => {
+/* GET index.html */
+app.get('/', async (req, res) => {
 	try {
-		const projetos = require('./data/projetos.json')
-		const total_projetos = projetos.length
-		const imagens = []
-		for(let i = 1; i <= 3 && i <= total_projetos; i++) {
-			imagens.push({ src: projetos.at(-i).imagem, projeto: projetos.at(-i).nome })
-		}
-		
-		let total_testes = 0
-		const testes = fs.readdirSync('./data/testes')
-		testes.forEach(arquivo => {
-			total_testes += JSON.parse(fs.readFileSync(`./data/testes/${arquivo}`)).length
-		})
+		const response = await axios.get(url_api + '/api/projetos')
+		const data = response.data
 
-
-		res.render('index', { imagens, total_testes, total_projetos })
+		res.render('index', {
+			imagens: data.imagens,
+			total_testes: data.total_testes,
+			total_projetos: data.total_projetos })
 	}
 	catch (error) {
 		console.error(error.message)
@@ -40,6 +35,7 @@ app.get('/', (req, res) => {
 
 
 app.post('/login', (req, res) => {
+	//POST /login
 	console.log(req.body)
 	const users = require('./data/usuarios.json')
 	const login = users.find(user => user.email == req.body.email && user.senha == req.body.password)
@@ -51,16 +47,15 @@ app.post('/login', (req, res) => {
 	}
 })
 
-app.get('/user/:userid', (req, res) => {
+app.get('/user/:userid', async (req, res) => {
+	//GET /user
 	try {
-		const users = require('./data/usuarios.json')
-		const usuario = users.find(user => user.id == req.params.userid)
-		const projetos = require('./data/projetos.json')
-		const projetosUser = usuario.projetos.map(projetoId => {
-			const projeto = projetos.find(p => p.id === projetoId);
-			return { id: projeto.id, nome: projeto.nome };
-		});
-		res.render('user', { usuario, projetosUser })
+		const response = await axios.get(url_api + `/api/user/${req.params.userid}`)
+		const data = response.data
+
+		res.render('user', {
+			usuario: data.usuario,
+			projetosUser: data.projetosUser })
 	}
 	catch (error) {
 		console.error(error.message)
@@ -69,6 +64,7 @@ app.get('/user/:userid', (req, res) => {
 })
 
 app.get('/projeto/:userid', (req, res) => {
+	//GET /projeto
 	try {
 		const users = require('./data/usuarios.json')
 		const usuario = users.find(user => user.id == req.params.userid)
@@ -90,6 +86,7 @@ app.get('/projeto/:userid', (req, res) => {
 
 /* Rota pro fetch no /user pra preencher as tabelas */
 app.get('/testes/:id', (req, res) => {
+	//GET /testes
 	try{
 		const users = require('./data/usuarios.json')
 		const testes = JSON.parse(fs.readFileSync(`data/testes/projeto${req.params.id}.json`))

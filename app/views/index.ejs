@@ -72,11 +72,11 @@
                 <p>Número de Projetos Cadastrados: <%= total_projetos %></p>
                 <p>Últimos Hardwares Cadastrados:</p>
                 <div class="galeria">
-                    <% imagens.forEach(img => { %>
+                    <% imagens.forEach((imagem, index) => { %>
                         <div class="img-container">
-                            <img width="430" height="300" alt="<%= img.projeto %>" src="images/<%= img.src %>">
+                            <img width="430" height="300" alt="Imagem <%= index + 1 %>" src="data:image/jpeg;base64,<%= imagem %>">
                             <div class="desc">
-                                <%= img.projeto %>
+                                <%#= img.projeto %>
                             </div>
                         </div>
                     <% }) %>
