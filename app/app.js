@@ -1,13 +1,28 @@
 const express = require('express');
 const app = express();
 const axios = require('axios');
-//const multer = require(multer)
+const multer = require('multer')
+const FormData = require('form-data');
+const path = require('path')
 const fs = require("fs");
 const validateForms = require('./src/validateForms.js')
 
 app.use(express.urlencoded({ extended: true }))
 app.use(express.static('public'));
 app.set('view engine', 'ejs')
+
+const upload = multer({ 
+    // Armazena arquivos no disco
+    storage: multer.diskStorage({
+        destination: (req, file, cb) => {
+            cb(null, path.resolve(__dirname, 'uploads'));
+        },
+        filename: (req, file, cb) => {
+            cb(null, file.originalname);
+        }
+    }),
+    limits: { fileSize: 20 * 1024 * 1024 } // 20MB
+})
 
 const url_api = 'http://localhost:8081' //`http://${process.env.HOST}:${process.env.PORT}`
 
@@ -33,7 +48,6 @@ app.get('/', async (req, res) => {
 	}
 })
 
-
 app.post('/login', (req, res) => {
 	//POST /login
 	console.log(req.body)
@@ -47,6 +61,22 @@ app.post('/login', (req, res) => {
 	}
 })
 
+/* POST novo usuário */
+app.post('/signup', async (req, res) => {
+	const response = await axios.post(url_api + '/api/user', JSON.stringify(req.body),
+										{
+											headers: {
+												'Content-Type': 'application/json'
+											}
+										})
+	const data = response.data
+	if(data.success) {
+		res.redirect(`/user/${data.id}`)
+	}
+	else { res.sendStatus(404) }
+})
+
+/* GET user.html */
 app.get('/user/:userid', async (req, res) => {
 	//GET /user
 	try {
@@ -63,20 +93,20 @@ app.get('/user/:userid', async (req, res) => {
 	}
 })
 
-app.get('/projeto/:userid', (req, res) => {
+/* GET projeto.html */
+app.get('/projeto/:userid', async (req, res) => {
 	//GET /projeto
 	try {
-		const users = require('./data/usuarios.json')
-		const usuario = users.find(user => user.id == req.params.userid)
-		const lista = users.map(user => {return { id:user.id, nome: user.nome }})
-		const projetosJSON = require('./data/projetos.json')
-		const projetos = projetosJSON.map(projeto => {return { id: projeto.id, nome: projeto.nome }})
-		if(usuario.nivel == 3) {
-			res.render('projeto', { usuario, projetos, lista })
+		const response = await axios.get(url_api + `/api/projetos/${req.params.userid}`)
+		const data = response.data
+		if(data.success){
+			res.render('projeto', {
+				usuario: data.usuario,
+				projetos: data.projetos,
+				lista: data.lista
+			})
 		}
-		else {
-			res.redirect(req.header.referer)
-		}
+		else { res.redirect('/') }
 	}
 	catch (error) {
 		console.error(error.message)
@@ -84,13 +114,13 @@ app.get('/projeto/:userid', (req, res) => {
 	}
 })
 
-/* Rota pro fetch no /user pra preencher as tabelas */
-app.get('/testes/:id', (req, res) => {
-	//GET /testes
+/* GET Assíncrono no /user pra preencher as tabelas */
+app.get('/testes/:id', async (req, res) => {
 	try{
-		const users = require('./data/usuarios.json')
-		const testes = JSON.parse(fs.readFileSync(`data/testes/projeto${req.params.id}.json`))
-		res.send(testes)
+		const response = await axios.get(url_api + `/api/projeto/${req.params.id}/testes`)
+		const data = response.data
+		if(data.success){ res.send(data.testes) }
+		else {res.sendStatus(404)}
 	}
 	catch (error) {
 		console.error(error.message)
@@ -98,28 +128,59 @@ app.get('/testes/:id', (req, res) => {
 	}
 })
 
-/* Rota pro fetch no /projeto pra preencher as tabelas*/
-app.get('/lista/:id', (req, res) => {
+/* GET Assíncrono no /projeto pra preencher as tabelas*/
+app.get('/lista/:id', async (req, res) => {
 	try {
-		const users = require('./data/usuarios.json')
-		const projetos = require('./data/projetos.json')
-		const projeto = projetos.find(projeto =>  projeto.id == req.params.id)
-
-		const lista = projeto.usuarios.map(userID => {
-			const usuario = users.find(u => u.id === userID);
-			return usuario
-		});
-
-		const imagem = projeto.imagem
-		res.send({ lista, imagem })
+		const response = await axios.get(url_api + `/api/projeto/${req.params.id}`)
+		const data = response.data
+		res.send({ lista: data.lista, imagem: data.imagem })
 	}
 	catch (error) {
 		console.error(error.message)
 		res.sendStatus(404)
 	}
 })
-
+/* POST novo projeto */
+app.post('/addProjeto', upload.single('imagem'), async (req, res) => {
+	if(req.file.mimetype.includes('image')) {
+		const form = new FormData()
+		form.append('imagem', fs.createReadStream(req.file.path), {
+			filename: req.file.filename,
+			contentType: req.file.mimetype
+		})
+		form.append('nome', req.body.nome)
+		try {
+			const response = await axios.post(url_api + '/api/projeto', form, {
+				headers: {
+					...form.getHeaders()
+				}
+			})
+			const data = response.data
+			res.redirect('back')
+			//res.location(req.get("Referrer") || "/")
+		} catch (error) {
+			res.sendStatus(404)
+		} finally {
+			fs.unlink(req.file.path, (err) => {
+				if (err) { console.error('Erro ao remover arquivo temporário:', err) }
+				else { console.log('Arquivo temporário removido:', req.file.path) }
+			})
+		}
+	}
+	else {
+		res.sendStatus(404)
+	}
+})
 /* Recebe o formulário preenchido, valida e cria um teste relacionado ao projeto especificado */
-app.post('/add_teste', validateForms, (req, res) => {
-	res.send("show mano")
+app.post('/add_teste', validateForms, async (req, res) => {
+	const pid = req.body.projeto_id
+	const response = await axios.post(url_api + `/api/projeto/${pid}/teste`,
+										JSON.stringify(req.body),
+										{
+											headers: {
+												'Content-Type': 'application/json'
+											}
+										})
+	const data = response.data
+	res.redirect('back')
 })

@@ -76,6 +76,9 @@ async function getTestes(projeto) {
             row += "</tr>"
             tbody.innerHTML += row
         })
+
+        const inputHidden = document.querySelector(".form-section input[type='hidden']")
+        inputHidden.setAttribute('value', projeto_id)
     }
     catch (error) {
         console.error(error.message)

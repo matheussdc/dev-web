@@ -3,3 +3,5 @@ api/node_modules/
 
 api/data/**/*.json
 !api/data/**/*.copy.json
+
+api/images/*

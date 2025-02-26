@@ -55,7 +55,7 @@
         <% if ([2, 3].includes(usuario.nivel)) { %>
         <section id="registro" class="form-section">
             <h2>Adicionar Registro</h2>
-            <form action="/add_teste" method="post" oninput="nota.value=parseInt(avaliacao.value)">
+            <form action="/add_teste" method="POST" oninput="nota.value=parseInt(avaliacao.value)">
                 <label for="hardware">Hardware ID</label>
                 <input id="hardware" type="text" name="hardware" required>
                 <label for="modelo">Modelo</label>
@@ -73,7 +73,7 @@
                 <label for="descricao">Detalhes adicionais</label>
                 <textarea id="descricao" class="text-desc" rows="5" name="detalhes"></textarea>
                 <button id="salvar" type="submit">Salvar</button>
-                <input id="projeto_id" type="hidden" value="3" name="projeto_id">
+                <input id="projeto_id" type="hidden" value="" name="projeto_id">
             </form>
             <a href="#" class="close-btn">Fechar</a>
         </section>
