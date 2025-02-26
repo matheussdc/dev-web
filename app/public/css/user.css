@@ -28,6 +28,7 @@ nav a {
     background: #0056b3;
     padding: 10px 15px;
     border-radius: 5px;
+    cursor: pointer;
 }
 
 nav a:hover {
@@ -48,6 +49,7 @@ nav a:hover {
     color: white;
     text-decoration: none;
     border-radius: 5px;
+    cursor: pointer;
 }
 
 .tab-buttons a:hover {

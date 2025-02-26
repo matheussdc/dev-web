@@ -206,3 +206,37 @@ app.post('/api/projeto/:pid/teste', (req, res) => {
 
 	res.status(201).json({ success: true, id: novoTeste.id })
 })
+//DELETE registro de teste
+app.delete('/api/projeto/:pid/teste/:tid', (req, res) => {
+	const testes = require(`./data/testes/projeto${req.params.pid}.json`)
+	const aSerDeletado = testes.find(teste => parseInt(teste.id) == req.params.tid)
+	if(aSerDeletado) {
+		testes.splice(testes.indexOf(aSerDeletado), 1)
+        fs.writeFileSync(`./data/testes/projeto${req.params.pid}.json`, JSON.stringify(testes, {}, 4))
+        res.status(200).json({ success: true, teste: aSerDeletado})
+	}
+	else {
+		res.status(404).send({ success: false, message: "ID não encontrado" })
+	}
+})
+
+app.put('/api/projeto/:pid/teste/:tid', (req, res) => {
+	const teste = req.body
+	const testes = require(`./data/testes/projeto${req.params.pid}.json`)
+	const attTeste = {
+		id: teste.teste_id,
+		hardware: teste.hardware,
+		modelo: teste.modelo,
+		temperatura: teste.temperatura,
+		pressao: teste.pressao,
+		altura: teste.altura,
+		data: teste.data,
+		avaliacao: teste.avaliacao,
+		resultado: teste.avaliacao == 10 ? true : false,
+		detalhes: teste.detalhes
+	}
+	testes.splice(testes.indexOf(attTeste), 1, attTeste)
+	fs.writeFileSync(`./data/testes/projeto${req.params.pid}.json`, JSON.stringify(testes, {}, 4))
+
+	res.status(201).json({ success: true, id: attTeste.id })
+})

@@ -140,6 +140,7 @@ app.get('/lista/:id', async (req, res) => {
 		res.sendStatus(404)
 	}
 })
+
 /* POST novo projeto */
 app.post('/addProjeto', upload.single('imagem'), async (req, res) => {
 	if(req.file.mimetype.includes('image')) {
@@ -171,6 +172,7 @@ app.post('/addProjeto', upload.single('imagem'), async (req, res) => {
 		res.sendStatus(404)
 	}
 })
+
 /* Recebe o formulário preenchido, valida e cria um teste relacionado ao projeto especificado */
 app.post('/add_teste', validateForms, async (req, res) => {
 	const pid = req.body.projeto_id
@@ -183,4 +185,35 @@ app.post('/add_teste', validateForms, async (req, res) => {
 										})
 	const data = response.data
 	res.redirect('back')
+})
+/* POST para alterar dados de um registro */
+app.post('/edit_teste', async (req, res) => {
+	const pid = req.body.projeto_id
+	const tid = req.body.teste_id
+	const response = await axios.put(url_api + `/api/projeto/${pid}/teste/${tid}`,
+										JSON.stringify(req.body),
+										{
+											headers: {
+												'Content-Type': 'application/json'
+											}
+										})
+	const data = response.data
+	res.redirect('back')
+})
+app.post('/delTeste/:pid/:tid', async (req, res) => {
+	const tid = req.params.tid
+	const pid = req.params.pid
+	try{
+		const response = await axios.delete(url_api + `/api/projeto/${pid}/teste/${tid}`)
+		const data = response.data
+		if(data.success) {
+			res.send({ success: true, teste: data.teste })
+		}
+		else {
+			res.send({ success: false, message: data.message })
+		}
+	} catch(error) {
+		console.error(error.message)
+		res.status(404).send({ message: 'seila' })
+	}
 })
