@@ -53,7 +53,10 @@ async function getTestes(projeto) {
             <td>${teste.temperatura}</td>
             <td>${teste.pressao}</td>
             <td>${teste.altura}</td>
-            <td>${teste.data}</td>
+            `
+            data = teste.data.split('-').reverse().join('-')
+            row +=`
+            <td>${data}</td>
             <td>${teste.avaliacao}</td>
             <td>${resultado}</td>
             `
@@ -63,12 +66,11 @@ async function getTestes(projeto) {
             } else {
                 row += "<td></td>"
             }
-            console.log("oie cheuggei com", nivel)
             if([2, 3].includes(nivel)) {
                 row += `<td>
-                            <button>Editar</button>`
+                            <button onclick='editar(this)'>Editar</button>`
                 if(nivel == 3) {
-                    row +=" <button class='delete-btn'>Deletar</button>"
+                    row +=" <button class='delete-btn' onclick='delTeste(this)'>Deletar</button>"
                 }
                 row += "</td>"
             }
@@ -76,13 +78,73 @@ async function getTestes(projeto) {
             row += "</tr>"
             tbody.innerHTML += row
         })
+
+        const inputHidden = document.querySelector("#projeto_id-add")
+        inputHidden.setAttribute('value', projeto_id)
     }
     catch (error) {
         console.error(error.message)
     }
 }
 
+async function delTeste(teste) {
+    var row = teste.parentNode.parentNode;
+    var teste_id = row.cells[0].innerText
+    var projeto_id = document.querySelector("select").value
+    console.log(teste_id, typeof teste_id)
+    console.log('e o do projeto é -', projeto_id)
+    try {
+        const url = `/delTeste/${projeto_id}/${parseInt(teste_id)}`
+        const response = await fetch(url, { method: 'POST' })
+        if(!response.ok) throw new Error(`Status da Resposta: ${response.status}`);
+
+        const confirma = await response.json()
+        console.log('confirma:', confirma.message)
+    } catch (error) {
+        console.error(error.message)
+    }
+}
+
+function editar(teste) {
+    show('editar')
+    var form = document.querySelector("#editar form")
+    var titulo = document.querySelector("#editar h2")
+    var row = teste.parentNode.parentNode;
+    titulo.innerText = `Editar Registro - ${row.cells[0].innerText}`
+    var inputs = form.querySelectorAll("input")
+    for(let i=0; i <= 7; i++){
+        if(i == 6) {inputs[i].value = row.cells[i].innerText.split('-').reverse().join('-')}
+        else {inputs[i].value = row.cells[i].innerText}
+    }
+    inputs[8].value = document.querySelector("select").value
+    //descrição
+    const texto = descricoes[row.cells[0].innerText]
+    form.querySelector("textarea").value = texto ? texto : ""
+}
+
+function show(bloco) {
+    var projetos = document.querySelector("#projetos")
+    var registro = document.querySelector("#registro")
+    var editar   = document.querySelector("#editar")
+    if(bloco == 'projetos') {
+        projetos.style.display = "block"
+        registro.style.display = "none"
+        editar  .style.display = "none"
+    }
+    if(bloco == 'registro'){
+        projetos.style.display = "none"
+        registro.style.display = "block"
+        editar  .style.display = "none"
+    } 
+    if(bloco == 'editar'){
+        projetos.style.display = "none"
+        registro.style.display = "none"
+        editar  .style.display = "block"
+    }
+}
 //onload
 function initial() {
-    window.location.hash = "projetos";
+    var projetos = document.querySelector("#projetos")
+    projetos.style.display = "block"
+    var registro = document.querySelector("#registro")
 }

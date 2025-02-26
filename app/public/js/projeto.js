@@ -24,7 +24,7 @@ async function getUsers(projeto) {
         theader.innerText = `Lista de Usuários com Acesso - ${projeto_nome}`
 
         const img = document.querySelector("fieldset img")
-        img.setAttribute("src", `/images/${imagem}`)
+        img.setAttribute("src", `data:image/jpeg;base64,${imagem}`)
         img.setAttribute("alt", `Hardware associado a ${projeto_nome}`)
 
         const tbody = document.querySelector("tbody")

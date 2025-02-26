@@ -27,9 +27,9 @@
 
     <main>
         <div class="tab-buttons">
-            <a href="#projetos">Projetos</a>
+            <a onclick="show('projetos')">Projetos</a>
             <% if ([2, 3].includes(usuario.nivel)) { %>
-                <a href="#registro">Novo Registro</a>
+                <a onclick="show('registro')">Novo Registro</a>
             <% } %>
         </div>
         <div class="columns">
@@ -55,7 +55,7 @@
         <% if ([2, 3].includes(usuario.nivel)) { %>
         <section id="registro" class="form-section">
             <h2>Adicionar Registro</h2>
-            <form action="/add_teste" method="post" oninput="nota.value=parseInt(avaliacao.value)">
+            <form action="/add_teste" method="POST" oninput="nota.value=parseInt(avaliacao.value)">
                 <label for="hardware">Hardware ID</label>
                 <input id="hardware" type="text" name="hardware" required>
                 <label for="modelo">Modelo</label>
@@ -73,7 +73,32 @@
                 <label for="descricao">Detalhes adicionais</label>
                 <textarea id="descricao" class="text-desc" rows="5" name="detalhes"></textarea>
                 <button id="salvar" type="submit">Salvar</button>
-                <input id="projeto_id" type="hidden" value="3" name="projeto_id">
+                <input id="projeto_id-add" type="hidden" value="" name="projeto_id">
+            </form>
+            <a href="#" class="close-btn">Fechar</a>
+        </section>
+        <section id="editar" class="form-section">
+            <h2>Editar Registro</h2>
+            <form action="/edit_teste" method="POST" oninput="nota.value=parseInt(avaliacao.value)">
+                <input id="teste_id-edit" type="hidden" value="" name="teste_id">
+                <label for="hardware">Hardware ID</label>
+                <input id="hardware" type="text" name="hardware" required>
+                <label for="modelo">Modelo</label>
+                <input id="modelo" type="text" name="modelo" required>
+                <label for="temperatura">Temperatura</label>
+                <input id="temperatura" type="text" name="temperatura" required>
+                <label for="pressao">Pressão</label>
+                <input id="pressao" type="text" name="pressao" required>
+                <label for="altura">Altura</label>
+                <input id="altura" type="text" name="altura" required>
+                <label for="data">Data</label>
+                <input id="data" type="date" name="data" required>
+                <label for="avaliacao">Nota de avaliação do teste: <output for="avaliacao" name="nota"></output></label>
+                <input id="avaliacao" type="range" min="0" max="10" name="avaliacao" required>
+                <label for="descricao">Detalhes adicionais</label>
+                <textarea id="descricao" class="text-desc" rows="5" name="detalhes"></textarea>
+                <button id="salvar" type="submit">Salvar</button>
+                <input id="projeto_id-edit" type="hidden" value="" name="projeto_id">
             </form>
             <a href="#" class="close-btn">Fechar</a>
         </section>

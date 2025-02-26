@@ -45,11 +45,13 @@
             
             <fieldset>
                 <legend>Criar Novo Projeto</legend>
-                <label for="novo">Nome</label>
-                <input id="novo" type="text" placeholder="Nome do Projeto">
-                <label for="imagem">Imagem do Hardware</label>
-                <input id="imagem" type="file" accept="image/jpeg, image/png, image/jpg">
-                <button class="adicionar-btn" aria-label="Adicionar Projeto no Banco de Dados">Criar Projeto</button>
+                <form action="/addProjeto" method="POST" enctype="multipart/form-data">
+                    <label for="novo">Nome</label>
+                    <input id="novo" type="text" placeholder="Nome do Projeto" name="nome">
+                    <label for="imagem">Imagem do Hardware</label>
+                    <input id="imagem" type="file" accept="image/jpeg, image/png, image/jpg" name="imagem">
+                    <button class="adicionar-btn">Criar Projeto</button>
+                </form>
             </fieldset>
         </div>
         
